@@ -8,13 +8,17 @@ const messages = [
   "Go and give 'em war! True bloody war!",
 ];
 
+const types = ["info", "success", "error"];
+
 button.addEventListener("click", () => createNotification());
 
-function createNotification() {
+function createNotification(message = null, type = null) {
   const notif = document.createElement("div");
   notif.classList.add("toast");
 
-  notif.innerText = getRandomMessage(); //Create the message from the messages arr
+  notif.classList.add(type ? type : getRandomType());
+
+  notif.innerText = message ? message : getRandomMessage(); //Create the message from the messages arr
   toasts.appendChild(notif); //Append it to the DOM
 
   //To remove messages from the DOM
@@ -25,4 +29,8 @@ function createNotification() {
 
 function getRandomMessage() {
   return messages[Math.floor(Math.random() * messages.length)];
+}
+
+function getRandomType() {
+  return types[Math.floor(Math.random() * types.length)];
 }
